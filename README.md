@@ -19,6 +19,18 @@ where:
  + `tagbody` describes the part of the code that follows. Not what, but why. This can include links to other tagged sections using `%%othertag ` (must be followed by a space, not the end of the delimited block).
  + `nexttag` denotes the next piece of code in sequence (this will appear as a link to that block).
 
+None of these may contain either `{` or `}` as this breaks the above structure (can't deal with escaping yet). Additionally though, `%%othertag` can appear anywhere in the code comments (e.g. also in inline comments) to refer to a literate code block. This could be very helpful for explaining reasoning behind a coding choice. For example
+
+```
+y <- 2 * x # this choice motivated by %%scale
+```
+
+These `%%othertag`s will be converted to links in the processed output, resulting in
+
+```
+y <- 2 * x # this choice motivated by `<a href="#scale">scale</a>`
+```
+
 ## Example:
 
 The [`literate.ks.test()`](https://github.com/jonocarroll/literate/blob/master/literate.ks.test.R) function uses a few trivial blocks to show what I mean. In reality, these would contain the 'why' of the block of code, linking to related parts of the code. There probably shouldn't be too many of these blocks in your function; if there are, maybe it's too complex and could be broken down into several smaller functions?
