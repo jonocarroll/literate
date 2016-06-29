@@ -73,3 +73,5 @@ Since the literate blocks are all commented, there should be no impact on non-li
  + htmlify the remainder of the function body. (easy)
  + find out how to hook into the internal RStudio browser. (hard)
  + build a better example case. (easy)
+ + `%%` is not a particularly protected choice, and perhaps something else would be better. (moderate)
+ + this list will eventually be in [Issue](https://github.com/jonocarroll/literate/issues). (easy)
