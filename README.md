@@ -23,7 +23,7 @@ For now, this is not quite a package, but it's coming along. Purely proof of con
 
 ## Usage
 
-After evaluating the `process_literate()` function, and a literate-programmed function (e.g. taking Donald Knuth's example, `literate.ks.test()`), the literate view can be generated with
+After evaluating the [`process_literate()`](https://github.com/jonocarroll/literate/blob/master/literate.R) function, and a literate-programmed function (e.g. taking Donald Knuth's example, [`literate.ks.test()`](https://github.com/jonocarroll/literate/blob/master/literate.ks.test.R)), the literate view can be generated with
 
 ```
 process_literate("literate.ks.test")
@@ -31,4 +31,4 @@ process_literate("literate.ks.test")
 
 where the only argument is the quoted name of the literate function to be processed. `process_literate` will extract the literate-specific blocks, generate links, save as a temporary .html file (via `tempfile`) and load the processed HTML into a browser via `browseURL`.
 
-The results for this example are shown here.
+[The results for this example are shown here](http://jonocarroll.github.io/literate/).
