@@ -46,3 +46,5 @@ process_literate("literate.ks.test")
 where the only argument is the quoted name of the literate function to be processed. `process_literate` will extract the literate-specific blocks, generate links, save as a temporary .html file (via `tempfile`) and load the processed HTML into a browser via `browseURL`.
 
 [The results for this example are shown here](http://jonocarroll.github.io/literate/).
+
+Since the literate blocks are all commented, there should be no impact on non-literate-programming functions, in which case it should just open a browser to the original code. At the moment that's broken (edge case).
