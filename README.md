@@ -28,7 +28,7 @@ y <- 2 * x # this choice motivated by %%scale
 These `%%othertag`s will be converted to links in the processed output, resulting in
 
 ```
-y <- 2 * x # this choice motivated by `<a href="#scale">scale</a>`
+y <- 2 * x # this choice motivated by <a href="#scale">scale</a>
 ```
 
 ## Example:
@@ -74,4 +74,4 @@ Since the literate blocks are all commented, there should be no impact on non-li
  + find out how to hook into the internal RStudio browser. (hard)
  + build a better example case. (easy)
  + `%%` is not a particularly protected choice, and perhaps something else would be better. (moderate)
- + this list will eventually be in [Issue](https://github.com/jonocarroll/literate/issues). (easy)
+ + this list will eventually be in [Issues](https://github.com/jonocarroll/literate/issues). (easy)
