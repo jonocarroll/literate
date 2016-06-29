@@ -6,7 +6,7 @@ This came as a flurry of inspiration while watching Donald Knuth's presentation 
 
 ## Proof of concept:
 
-This proof-of-concept takes things one step further; generate the documentation *inside* the code itself, and produce some (hopefully) fully self-documented functions that can be walked through via hyperlinks. This requires minimal additional markup within the function body, for now denoted by `#%` blocks. These can span multiple lines, but must follow this structure:
+This proof-of-concept takes things one step further; generate some deeper documentation *inside* the code itself, and produce some (hopefully) fully self-documented functions that can be walked through via hyperlinks. This is of interest to someone who wants to know how **the code works**, not **how to use it**. Achieving this requires minimal additional markup within the function body, for now denoted by `#%` blocks. These can span multiple lines, but must follow this structure:
 
 ```
 #%{tagname}{tagbody}{nexttag}
