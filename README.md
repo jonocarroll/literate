@@ -2,7 +2,7 @@
 
 ## Motivation:
 
-This came as a flurry of inspiration while watching Donald Knuth's presentation on literate programming at useR 2016. He mentioned that while R has nice ways of incorporating comments within code for a separate document (e.g. knitr), it didn't quite follow his paradigm of creating "simple modules linked in simple ways". We also have roxygen for generating documentation, but this still occurs outside of the function in the function header.
+This came as a flurry of inspiration while watching Donald Knuth's presentation on literate programming at useR 2016. He mentioned that while R has nice ways of incorporating comments within code for a separate document (e.g. knitr), it didn't quite follow his paradigm of creating "simple modules linked in simple ways" for self-sufficient, self-documented, self-contained code. We also have roxygen for generating documentation, but this still occurs outside of the function in the function header.
 
 ## Proof of concept:
 
