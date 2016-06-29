@@ -29,6 +29,8 @@ The [`literate.ks.test()`](https://github.com/jonocarroll/literate/blob/master/l
   alternative <- match.arg(alternative)
 ```
 
+In the above `checking` block, the description (trivial for now) would describe why certain cases are being tested, or why certain conditions are likely to be encountered. This might even link to a `%%conditionalreturn` block. The `basecase` tag refers to the next piece of code to be evaluated in sequence.
+
 ## Installation:
 
 For now, this is not quite a package, but it's coming along. Purely proof of concept on the one file for now.
