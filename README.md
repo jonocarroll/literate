@@ -2,13 +2,13 @@
 
 ## Motivation:
 
-This came as a flurry of inspiration while watching Donald Knuth's presentation on literate programming at useR 2016. He mentioned that while R has nice ways of incorporating comments within code for a separate document (e.g. knitr), it didn't quite follow his paradigm of creating "simple modules linked in simple ways" for self-sufficient, self-documented, self-contained code. We also have roxygen for generating documentation, but this still occurs outside of the function in the function header.
+This came as a flurry of inspiration while watching Donald Knuth's presentation on literate programming at useR 2016. He mentioned that while R has nice ways of incorporating comments within code (and vice versa) for a separate document (e.g. knitr), it didn't quite follow his paradigm of creating "simple modules linked in simple ways" for self-sufficient, self-documented, self-contained code. We also have roxygen for generating documentation, but this still occurs outside of the function in the function header.
 
 The idea struck me: why can't we have documentation *right inside the code* and be able to browse/wander/follow through that with hyperlinks?
 
 ## Proof of concept:
 
-This proof-of-concept takes things one step further; generate some deeper documentation *inside* the code itself, and produce some (hopefully) fully self-documented functions that can be walked through via hyperlinks. This is of interest to someone who wants to know how **the code works**, not **how to use it**. Achieving this requires minimal additional markup within the function body, for now denoted by `#%` blocks. These can span multiple lines, but must follow this structure:
+This proof-of-concept takes things one step further; generate some deeper documentation *inside* the code itself, and produce some (hopefully) fully self-documented functions that can be walked through via hyperlinks. This is of interest to someone who wants to know **how/why the code works**, not just **how to use it**. Achieving this requires minimal additional markup within the function body, for now denoted by `#%` blocks. These can span multiple lines, but must follow this structure:
 
 ```
 #%{tagname}{tagbody}{nexttag}
@@ -37,7 +37,7 @@ In the above `checking` block, the description (trivial for now) would describe 
 
 For now, this is not quite a package, but it's coming along. Purely proof of concept on the one file for now.
 
-## Usage
+## Usage:
 
 After evaluating the [`process_literate()`](https://github.com/jonocarroll/literate/blob/master/literate.R) function, and a literate-programmed function (e.g. taking Donald Knuth's example, [`literate.ks.test()`](https://github.com/jonocarroll/literate/blob/master/literate.ks.test.R)), the literate view can be generated with
 
