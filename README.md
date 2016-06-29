@@ -17,6 +17,18 @@ where:
  + `tagbody` describes the part of the code that follows. Not what, but why. This can include links to other tagged sections using `%%othertag ` (must be followed by a space, not the end of the delimited block).
  + `nexttag` denotes the next piece of code in sequence (this will appear as a link to that block).
 
+## Example:
+
+The [`literate.ks.test()`](https://github.com/jonocarroll/literate/blob/master/literate.ks.test.R) function uses a few trivial blocks to show what I mean. In reality, these would contain the 'why' of the block of code, linking to related parts of the code. There probably shouldn't be too many of these blocks in your function; if there are, maybe it's too complex and could be broken down into several smaller functions?
+
+```
+  #%{checking}{perform input checking. 
+  #% This comment is very long
+  #% and spans multiple lines. Processing needs 
+  #% to be able to handle this.}{basecase}
+  alternative <- match.arg(alternative)
+```
+
 ## Installation:
 
 For now, this is not quite a package, but it's coming along. Purely proof of concept on the one file for now.
