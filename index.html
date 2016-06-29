@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Literate by jonocarroll</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Literate</h1>
+        <p>Taking literate programming one step further, down into the code itself</p>
+
+        <p class="view"><a href="https://github.com/jonocarroll/literate">View the Project on GitHub <small>jonocarroll/literate</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/jonocarroll/literate/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jonocarroll/literate/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jonocarroll/literate">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><br></p><br><br>literate.ks.test &lt;- function (x, y, ..., alternative = c("two.sided", "less", "greater"), <br>          exact = NULL) <br>{<br><br>#% <a id="checking"><b>checking</b></a><br>#% perform input checking. 
+  <br>#% This comment is very long
+  <br>#% and spans multiple lines. Processing needs 
+  <br>#% to be able to handle this. <a href="#basecase"> next block </a> <br><br><br><br><br>  alternative &lt;- match.arg(alternative)<br>  DNAME &lt;- deparse(substitute(x))<br>  x &lt;- x[!is.na(x)]<br>  n &lt;- length(x)<br>  if (n &lt; 1L) <br>    stop("not enough 'x' data")<br>  PVAL &lt;- NULL<br><br>#% <a id="basecase"><b>basecase</b></a><br>#% define the base case to use <a href="#pvalue"> next block </a> <br><br>  if (is.numeric(y)) {<br>    DNAME &lt;- paste(DNAME, "and", deparse(substitute(y)))<br>    y &lt;- y[!is.na(y)]<br>    n.x &lt;- as.double(n)<br>    n.y &lt;- length(y)<br>    if (n.y &lt; 1L) <br>      stop("not enough 'y' data")<br>    if (is.null(exact)) <br>      exact &lt;- (n.x <em> n.y &lt; 10000)<br>    METHOD &lt;- "Two-sample Kolmogorov-Smirnov test"<br>    TIES &lt;- FALSE<br>    n &lt;- n.x </em> n.y/(n.x + n.y)<br>    w &lt;- c(x, y)<br>    z &lt;- cumsum(ifelse(order(w) &lt;= n.x, 1/n.x, -1/n.y))<br>    if (length(unique(w)) &lt; (n.x + n.y)) {<br>      if (exact) {<br>        warning("cannot compute exact p-value with ties")<br>        exact &lt;- FALSE<br>      }<br>      else warning("p-value will be approximate in the presence of ties")<br>      z &lt;- z[c(which(diff(sort(w)) != 0), n.x + n.y)]<br>      TIES &lt;- TRUE<br>    }<br>    STATISTIC &lt;- switch(alternative, two.sided = max(abs(z)), <br>                        greater = max(z), less = -min(z))<br>    nm_alternative &lt;- switch(alternative, two.sided = "two-sided", <br>                             less = "the CDF of x lies below that of y", greater = "the CDF of x lies above that of y")<br>    if (exact &amp;&amp; (alternative == "two.sided") &amp;&amp; !TIES) <br>      PVAL &lt;- 1 - .Call(stats:::C_pSmirnov2x, STATISTIC, n.x, n.y)<br>  }<br>  else {<br>    if (is.character(y)) <br>      y &lt;- get(y, mode = "function", envir = parent.frame())<br>    if (!is.function(y)) <br>      stop("'y' must be numeric or a function or a string naming a valid function")<br>    METHOD &lt;- "One-sample Kolmogorov-Smirnov test"<br>    TIES &lt;- FALSE<br>    if (length(unique(x)) &lt; n) {<br>      warning("ties should not be present for the Kolmogorov-Smirnov test")<br>      TIES &lt;- TRUE<br>    }<br>    if (is.null(exact)) <br>      exact &lt;- (n &lt; 100) &amp;&amp; !TIES<br>    x &lt;- y(sort(x), ...) - (0:(n - 1))/n<br>    STATISTIC &lt;- switch(alternative, two.sided = max(c(x, <br>                                                       1/n - x)), greater = max(1/n - x), less = max(x))<br>    if (exact) {<br>      PVAL &lt;- 1 - if (alternative == "two.sided") <br>        .Call(C_pKolmogorov2x, STATISTIC, n)<br>      else {<br>        pkolmogorov1x &lt;- function(x, n) {<br>          if (x &lt;= 0) <br>            return(0)<br>          if (x &gt;= 1) <br>            return(1)<br>          j &lt;- seq.int(from = 0, to = floor(n <em> (1 - <br>                                                   x)))<br>          1 - x </em> sum(exp(lchoose(n, j) + (n - j) <em> log(1 - <br>                                                          x - j/n) + (j - 1) </em> log(x + j/n)))<br>        }<br>        pkolmogorov1x(STATISTIC, n)<br>      }<br>    }<br>    nm_alternative &lt;- switch(alternative, two.sided = "two-sided", <br>                             less = "the CDF of x lies below the null hypothesis", <br>                             greater = "the CDF of x lies above the null hypothesis")<br>  }<br><br>#% <a id="pvalue"><b>pvalue</b></a><br>#% calculate C_pKS2 but refer to <a href="#basecase">basecase</a> for reference <a href="#returnstructure"> next block </a> <br><br>  names(STATISTIC) &lt;- switch(alternative, two.sided = "D", <br>                             greater = "D^+", less = "D^-")<br>  if (is.null(PVAL)) {<br>    pkstwo &lt;- function(x, tol = 1e-06) {<br>      if (is.numeric(x)) <br>        x &lt;- as.double(x)<br>      else stop("argument 'x' must be numeric")<br>      p &lt;- rep(0, length(x))<br>      p[is.na(x)] &lt;- NA<br>      IND &lt;- which(!is.na(x) &amp; (x &gt; 0))<br>      if (length(IND)) <br>        p[IND] &lt;- .Call(C_pKS2, p = x[IND], tol)<br>      p<br>    }<br>    PVAL &lt;- ifelse(alternative == "two.sided", 1 - pkstwo(sqrt(n) <em> <br>                                                            STATISTIC), exp(-2 </em> n * STATISTIC^2))<br>  }<br><br>#% <a id="returnstructure"><b>returnstructure</b></a><br>#% generate the return structure <a href="#end"> next block </a> <br><br>  PVAL &lt;- min(1, max(0, PVAL))<br>  RVAL &lt;- list(statistic = STATISTIC, p.value = PVAL, alternative = nm_alternative, <br>               method = METHOD, data.name = DNAME)<br>  class(RVAL) &lt;- "htest"<br>  return(RVAL)<br>}<br>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/jonocarroll">jonocarroll</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
