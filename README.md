@@ -50,3 +50,14 @@ where the only argument is the quoted name of the literate function to be proces
 [The results for this example are shown here](http://jonocarroll.github.io/literate/).
 
 Since the literate blocks are all commented, there should be no impact on non-literate-programming functions, in which case it should just open a browser to the original code. At the moment that's broken (edge case).
+
+## Ideas for going forward:
+
+ + Fix the edge case where there is no literate markup, in which case this currently fails. (easy)
+ + add a table of contents of all literate links. (easy)
+ + better processing of the tags with more sophisticated regex. (moderate)
+ + CSS styling on the links to distinguish them from the code, and add top/bottom jumps. (moderate)
+ + Use a monospace font specifically for output. (easy)
+ + htmlify the remainder of the function body. (easy)
+ + find out how to hook into the internal RStudio browser. (hard)
+ + build a better example case. (easy)
