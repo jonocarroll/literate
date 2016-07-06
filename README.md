@@ -75,3 +75,4 @@ Since the literate blocks are all commented, there should be no impact on non-li
  + build a better example case. (easy)
  + `%%` is not a particularly protected choice, and perhaps something else would be better. (moderate)
  + this list will eventually be in [Issues](https://github.com/jonocarroll/literate/issues). (easy)
+ + include links to GitHub issues right in the comments. (easy)
